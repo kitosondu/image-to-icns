@@ -1,0 +1,29 @@
+name: Create .icns file in MacOS container
+on:
+  # on push to default branch
+  # push:
+  # manualy in GitHub interface
+  workflow_dispatch:
+
+jobs:
+  # Artifacts available at: /Users/runner/work/dev-tools-app/dev-tools-app/out/make
+  create_icns_file:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: create .icns file
+      env:
+        PNG_IMAGE_URL: ${{ vars.PNG_IMAGE_URL }}
+      run: |
+        chmod +x ./create-icns.sh
+        ./create-icns.sh
+      shell: bash
+
+    - name: Save file to cache/artifact storage to be able to download it later
+      uses: actions/upload-artifact@v3
+      with:
+        name: icon.icns
+        path: icon.icns
+        retention-days: 3      
+
