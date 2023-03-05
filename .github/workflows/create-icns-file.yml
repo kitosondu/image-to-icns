@@ -6,7 +6,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Artifacts available at: /Users/runner/work/dev-tools-app/dev-tools-app/out/make
   create_icns_file:
     runs-on: macos-latest
     steps:
